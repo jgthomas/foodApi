@@ -5,7 +5,7 @@ const tableName = process.env.mainTableName;
 
 exports.handler = async (event) => {
   if (!event.pathParameters || !event.pathParameters.ID) {
-    return Responses._400({ message: 'Missing the food ID from the path' });
+    return Responses._400({ message: 'missing the ID from the path' });
   }
 
   let ID = event.pathParameters.ID;
@@ -15,7 +15,7 @@ exports.handler = async (event) => {
   });
 
   if (!food) {
-    return Responses._400({ message: `Failed to get food using ID: ${ID}` });
+    return Responses._400({ message: 'Failed to get user by ID' });
   }
 
   return Responses._200({ food: food });

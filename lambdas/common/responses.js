@@ -7,7 +7,6 @@ const Headers = {
 const Responses = {
   _200(data = {}) {
     return {
-      status: 'success',
       headers: Headers,
       statusCode: 200,
       body: JSON.stringify(data),
@@ -16,7 +15,6 @@ const Responses = {
 
   _400(data = {}) {
     return {
-      status: 'failure',
       headers: Headers,
       statusCode: 400,
       body: JSON.stringify(data),
