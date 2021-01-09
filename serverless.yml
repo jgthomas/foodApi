@@ -18,9 +18,9 @@ functions:
     handler: lambdas/endpoints/addFood.handler
     events:
       - http:
-        path: addFood
-        method: POST
-        cors: true
+          path: addFood/
+          method: POST
+          cors: true
 
 custom:
   mainTableName: food-items
