@@ -3,7 +3,7 @@ const AWS = require('aws-sdk');
 const documentClient = new AWS.DynamoDB.DocumentClient();
 
 const Dynamo = {
-  /*async get(ID, TableName) {
+  async get(ID, TableName) {
     const params = {
       TableName,
       Key: {
@@ -21,7 +21,7 @@ const Dynamo = {
     console.log(data);
 
     return data.Item;
-  },*/
+  },
   async write(data, TableName) {
     if (!data.ID) {
       throw Error('no ID on the data');

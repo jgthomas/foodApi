@@ -21,6 +21,13 @@ functions:
           path: addFood/
           method: POST
           cors: true
+  getFood:
+    handler: lambdas/endpoints/getFood.handler
+    events:
+      - http:
+          path: getFood/{ID}
+          method: GET
+          cors: true
 
 custom:
   mainTableName: food-items
