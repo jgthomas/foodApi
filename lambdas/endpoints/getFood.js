@@ -8,7 +8,7 @@ exports.handler = async (event) => {
     return Responses._400({ message: 'Missing the food ID from the path' });
   }
 
-  let ID = event.pathParameters.ID;
+  const ID = event.pathParameters.ID;
 
   const food = await Dynamo.get(ID, tableName).catch(() => {
     return null;
