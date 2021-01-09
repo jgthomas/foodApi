@@ -5,7 +5,7 @@ const Headers = {
 };
 
 const Responses = {
-  _200(data = {}) {
+  response200(data = {}) {
     return {
       headers: Headers,
       statusCode: 200,
@@ -13,7 +13,7 @@ const Responses = {
     };
   },
 
-  _400(data = {}) {
+  response400(data = {}) {
     return {
       headers: Headers,
       statusCode: 400,

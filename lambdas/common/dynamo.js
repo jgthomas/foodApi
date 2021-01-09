@@ -7,7 +7,7 @@ const Dynamo = {
     const params = {
       TableName,
       Key: {
-        ID: ID,
+        ID,
       },
     };
 
@@ -15,10 +15,9 @@ const Dynamo = {
 
     if (!data || !data.Item) {
       throw Error(
-        `There was an error fetching the data for ID of ${ID} from ${TableName}`
+        `There was an error fetching the data for ID of ${ID} from ${TableName}`,
       );
     }
-    console.log(data);
 
     return data.Item;
   },
@@ -36,7 +35,7 @@ const Dynamo = {
 
     if (!res) {
       throw Error(
-        `There was an error inserting ID of ${data.ID} in table ${TableName}`
+        `There was an error inserting ID of ${data.ID} in table ${TableName}`,
       );
     }
 

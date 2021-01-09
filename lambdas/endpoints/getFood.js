@@ -5,18 +5,20 @@ const tableName = process.env.mainTableName;
 
 exports.handler = async (event) => {
   if (!event.pathParameters || !event.pathParameters.ID) {
-    return Responses._400({ message: 'Missing the ID from the path' });
+    return Responses.response400({ message: 'Missing the ID from the path' });
   }
 
-  let ID = event.pathParameters.ID;
+  const { ID } = event.pathParameters;
 
   const food = await Dynamo.get(ID, tableName).catch(() => {
     return null;
   });
 
   if (!food) {
-    return Responses._400({ message: `No food item found with name ${ID}` });
+    return Responses.response400({
+      message: `No food item found with name ${ID}`,
+    });
   }
 
-  return Responses._200({ food: food });
+  return Responses.response200({ food });
 };

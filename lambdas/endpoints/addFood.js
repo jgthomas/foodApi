@@ -7,7 +7,7 @@ exports.handler = async (event) => {
   const foodData = JSON.parse(event.body);
 
   if (!foodData.count) {
-    return Responses._400({ message: 'No count provided.' });
+    return Responses.response400({ message: 'No count provided.' });
   }
 
   const newFood = await Dynamo.write(foodData, tableName).catch(() => {
@@ -15,8 +15,8 @@ exports.handler = async (event) => {
   });
 
   if (!newFood) {
-    return Responses._400({ message: 'Failed to write food by ID' });
+    return Responses.response400({ message: 'Failed to write food by ID' });
   }
 
-  return Responses._200({ newFood });
+  return Responses.response200({ newFood });
 };
