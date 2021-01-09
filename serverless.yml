@@ -7,7 +7,7 @@ provider:
   runtime: nodejs12.x
 
 functions:
-  createPlayerScore:
+  addFood:
     handler: lambdas/endpoints/addFood.handler
     events:
       - http:
