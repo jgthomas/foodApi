@@ -1,11 +1,33 @@
 service: foodapi
 
-frameworkVersion: "2"
+frameworkVersion: '2'
 
 provider:
   name: aws
   runtime: nodejs12.x
 
 functions:
-  hello:
-    handler: handler.hello
+  createPlayerScore:
+    handler: lambdas/endpoints/addFood.handler
+    events:
+      - http:
+        path: addFood
+        method: POST
+        cors: true
+
+custom:
+  mainTableName: food-items
+
+resources:
+  Resources:
+    FoodItems:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.mainTableName}
+        AttributeDefinitions:
+          - AttributeName: ID
+            AttributeType: S
+        KeySchema:
+          - AttributeName: ID
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
