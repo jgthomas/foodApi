@@ -5,6 +5,13 @@ frameworkVersion: '2'
 provider:
   name: aws
   runtime: nodejs12.x
+  environment:
+    mainTableName: ${self:custom.mainTableName}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:*
+      Resource: '*'
 
 functions:
   addFood:
