@@ -36,6 +36,13 @@ functions:
           path: addRecipes/
           method: POST
           cors: true
+  getRecipes:
+    handler: lambdas/endpoints/getRecipes.handler
+    events:
+      - http:
+          path: getRecipes/
+          method: POST
+          cors: true
 
 custom:
   ingredientsTableName: ingredients
