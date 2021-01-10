@@ -15,7 +15,7 @@ exports.handler = async (event) => {
     return null;
   });
 
-  if (!category) {
+  if (!category || !category.members || category.members.length === 0) {
     return Responses.response400({
       message: `No category: ${ID}`,
     });
