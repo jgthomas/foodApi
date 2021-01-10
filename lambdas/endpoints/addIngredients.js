@@ -7,7 +7,7 @@ exports.handler = async (event) => {
   const ingredientsData = JSON.parse(event.body);
   const { ingredients } = ingredientsData;
 
-  if (!ingredients || ingredients.length === 0) {
+  if (!ingredients || !Array.isArray(ingredients) || ingredients.length === 0) {
     return Responses.response400({ message: 'No ingredients submitted.' });
   }
 
