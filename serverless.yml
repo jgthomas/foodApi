@@ -56,7 +56,7 @@ functions:
     events:
       - http:
           path: getIngredients/
-          method: GET
+          method: POST
           cors: true
 
 custom:
