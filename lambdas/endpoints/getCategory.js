@@ -22,7 +22,7 @@ exports.handler = async (event) => {
   }
 
   const foodsData = await Promise.all(
-    category.members.map((member) => {
+    category.members.map(async (member) => {
       return Dynamo.get(member, mainTable).catch(() => {
         return { member: null };
       });
