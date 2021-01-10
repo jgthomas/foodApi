@@ -21,11 +21,9 @@ exports.handler = async (event) => {
     });
   }
 
-  const categoryData = JSON.parse(category);
-
   const foodsData = await Promise.all(
-    categoryData.members.map(async (member) => {
-      Dynamo.get(member, mainTable).catch(() => {
+    category.members.map((member) => {
+      return Dynamo.get(member, mainTable).catch(() => {
         return { member: null };
       });
     }),
