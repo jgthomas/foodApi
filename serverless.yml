@@ -6,8 +6,6 @@ provider:
   name: aws
   runtime: nodejs12.x
   environment:
-    mainTableName: ${self:custom.mainTableName}
-    categoryTableName: ${self:custom.categoryTableName}
     ingredientsTableName: ${self:custom.ingredientsTableName}
   iamRoleStatements:
     - Effect: Allow
@@ -16,34 +14,6 @@ provider:
       Resource: '*'
 
 functions:
-  addFood:
-    handler: lambdas/endpoints/addFood.handler
-    events:
-      - http:
-          path: addFood/
-          method: POST
-          cors: true
-  getFood:
-    handler: lambdas/endpoints/getFood.handler
-    events:
-      - http:
-          path: getFood/{ID}
-          method: GET
-          cors: true
-  addCategory:
-    handler: lambdas/endpoints/addCategory.handler
-    events:
-      - http:
-          path: addCategory/
-          method: POST
-          cors: true
-  getCategory:
-    handler: lambdas/endpoints/getCategory.handler
-    events:
-      - http:
-          path: getCategory/{ID}
-          method: GET
-          cors: true
   addIngredients:
     handler: lambdas/endpoints/addIngredients.handler
     events:
@@ -60,34 +30,10 @@ functions:
           cors: true
 
 custom:
-  mainTableName: food-items
-  categoryTableName: food-categories
   ingredientsTableName: ingredients
 
 resources:
   Resources:
-    FoodItems:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        TableName: ${self:custom.mainTableName}
-        AttributeDefinitions:
-          - AttributeName: ID
-            AttributeType: S
-        KeySchema:
-          - AttributeName: ID
-            KeyType: HASH
-        BillingMode: PAY_PER_REQUEST
-    FoodCategories:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        TableName: ${self:custom.categoryTableName}
-        AttributeDefinitions:
-          - AttributeName: ID
-            AttributeType: S
-        KeySchema:
-          - AttributeName: ID
-            KeyType: HASH
-        BillingMode: PAY_PER_REQUEST
     Ingredients:
       Type: AWS::DynamoDB::Table
       Properties:
