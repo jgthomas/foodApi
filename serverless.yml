@@ -7,6 +7,7 @@ provider:
   runtime: nodejs12.x
   environment:
     mainTableName: ${self:custom.mainTableName}
+    categoryTableName: ${self:custom.categoryTableName}
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -28,9 +29,17 @@ functions:
           path: getFood/{ID}
           method: GET
           cors: true
+  addCategory:
+    handler: lambdas/endpoints/addCategory.handler
+    events:
+      - http:
+          path: addCategory/
+          method: POST
+          cors: true
 
 custom:
   mainTableName: food-items
+  categoryTableName: food-categories
 
 resources:
   Resources:
@@ -38,6 +47,17 @@ resources:
       Type: AWS::DynamoDB::Table
       Properties:
         TableName: ${self:custom.mainTableName}
+        AttributeDefinitions:
+          - AttributeName: ID
+            AttributeType: S
+        KeySchema:
+          - AttributeName: ID
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+    FoodCategories:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.categoryTableName}
         AttributeDefinitions:
           - AttributeName: ID
             AttributeType: S
