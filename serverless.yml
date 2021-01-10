@@ -36,6 +36,13 @@ functions:
           path: addCategory/
           method: POST
           cors: true
+  getCategory:
+    handler: lambdas/endpoints/getCategory.handler
+    events:
+      - http:
+          path: getCategory/{ID}
+          method: GET
+          cors: true
 
 custom:
   mainTableName: food-items
