@@ -51,6 +51,13 @@ functions:
           path: addIngredients/
           method: POST
           cors: true
+  getIngredients:
+    handler: lambdas/endpoints/getIngredients.handler
+    events:
+      - http:
+          path: getIngredients/
+          method: GET
+          cors: true
 
 custom:
   mainTableName: food-items
