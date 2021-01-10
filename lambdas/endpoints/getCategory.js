@@ -1,8 +1,8 @@
 const Responses = require('../common/responses');
 const Dynamo = require('../common/dynamo');
 
-const categoryTable = process.env.mainTableName;
-const mainTable = process.env.categoryTableName;
+const categoryTable = process.env.categoryTableName;
+const mainTable = process.env.mainTableName;
 
 exports.handler = async (event) => {
   if (!event.pathParameters || !event.pathParameters.ID) {
@@ -17,7 +17,7 @@ exports.handler = async (event) => {
 
   if (!category) {
     return Responses.response400({
-      message: `No food item found with name ${ID}`,
+      message: `No category: ${ID}`,
     });
   }
 
