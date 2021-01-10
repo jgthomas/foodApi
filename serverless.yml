@@ -7,6 +7,7 @@ provider:
   runtime: nodejs12.x
   environment:
     ingredientsTableName: ${self:custom.ingredientsTableName}
+    recipeTableName: ${self:custom.recipeTableName}
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -28,9 +29,17 @@ functions:
           path: getIngredients/
           method: POST
           cors: true
+  addRecipes:
+    handler: lambdas/endpoints/addRecipes.handler
+    events:
+      - http:
+          path: addRecipes/
+          method: POST
+          cors: true
 
 custom:
   ingredientsTableName: ingredients
+  recipeTableName: recipes
 
 resources:
   Resources:
@@ -38,6 +47,17 @@ resources:
       Type: AWS::DynamoDB::Table
       Properties:
         TableName: ${self:custom.ingredientsTableName}
+        AttributeDefinitions:
+          - AttributeName: ID
+            AttributeType: S
+        KeySchema:
+          - AttributeName: ID
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+    Recipes:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.recipeTableName}
         AttributeDefinitions:
           - AttributeName: ID
             AttributeType: S
