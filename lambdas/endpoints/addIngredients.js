@@ -12,7 +12,7 @@ exports.handler = async (event) => {
   }
 
   const ingredientsResponse = await Promise.all(
-    ingredientsData.map(async (ingredient) => {
+    ingredients.map(async (ingredient) => {
       return Dynamo.write(ingredient, tableName).catch(() => {
         return Responses.response400({
           message: `Failed to add ingredients: ${ingredientsData}`,
