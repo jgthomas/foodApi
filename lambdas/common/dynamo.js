@@ -15,7 +15,7 @@ const Dynamo = {
 
     if (!data || !data.Item) {
       throw Error(
-        `There was an error fetching the data for ID of ${ID} from ${TableName}`,
+        `There was an error fetching the data for ID: ${ID}, from ${TableName}`,
       );
     }
 
@@ -35,7 +35,7 @@ const Dynamo = {
 
     if (!res) {
       throw Error(
-        `There was an error inserting ID of ${data.ID} in table ${TableName}`,
+        `There was an error inserting ID: ${data.ID}, in table ${TableName}`,
       );
     }
 
