@@ -13,6 +13,9 @@ provider:
       Action:
         - dynamodb:*
       Resource: '*'
+  lambdaHashingVersion: 20201221 # will be default in serverless 3.0
+  apiGateway:
+    shouldStartNameWithService: true # will be default in serverless 3.0
 
 functions:
   addIngredients:
