@@ -2,7 +2,7 @@ const AWS = require('aws-sdk');
 const Dynamo = require('../../lambdas/common/dynamo');
 
 jest.mock('aws-sdk', () => {
-  const mDocumentClient = { get: jest.fn() };
+  const mDocumentClient = { get: jest.fn(), put: jest.fn() };
   const mDynamoDB = { DocumentClient: jest.fn(() => mDocumentClient) };
   return { DynamoDB: mDynamoDB };
 });
