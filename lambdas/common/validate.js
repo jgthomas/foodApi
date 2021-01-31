@@ -6,18 +6,14 @@ const ingredient = Joi.object({
   amount: Joi.number().min(1).required(),
 });
 
-const ingredients = Joi.array().items(ingredient).min(1).required();
+const ingredients = Joi.object({
+  ingredients: Joi.array().items(ingredient).min(1).required(),
+});
 
-const schemas = {
-  ingredients,
+const Validate = {
+  validateIngredients: (payload) => {
+    return ingredients.validate(payload);
+  },
 };
 
-const validateSchema = (schema, payload) => {
-  return schemas.schema.validate(payload);
-};
-
-const validateIngredients = (payload) => {
-  return validateSchema('ingredients', payload);
-};
-
-module.exports = validateIngredients;
+module.exports = Validate;
