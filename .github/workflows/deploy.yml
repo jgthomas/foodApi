@@ -28,8 +28,8 @@ jobs:
           npm run lint
           bash <(curl -s https://codecov.io/bash)
 
-      if: github.ref == 'refs/heads/master'
       - name: Deploy
+        if: github.ref == 'refs/heads/master'
         uses: serverless/github-action@master
         with:
           args: deploy
