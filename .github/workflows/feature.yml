@@ -28,3 +28,4 @@ jobs:
           npm ci
           npm test
           npm run lint
+          bash <(curl -s https://codecov.io/bash)
