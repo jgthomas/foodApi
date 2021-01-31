@@ -3,7 +3,7 @@ module.exports = {
   collectCoverage: true,
   coverageDirectory: 'coverage',
   coverageProvider: 'v8',
-  coverageReporters: ['html', 'lcov'],
+  coverageReporters: ['html', 'lcov', 'text'],
   testEnvironment: 'node',
   testMatch: ['**/tests/**/*.js'],
 };
