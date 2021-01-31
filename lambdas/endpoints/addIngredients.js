@@ -18,7 +18,7 @@ exports.handler = async (event) => {
     ingredients.map(async (ingredient) => {
       return Dynamo.write(ingredient, tableName).catch(() => {
         return Responses.response400({
-          message: `Failed to add ingredients: ${ingredientsData}`,
+          message: `Failed to add ingredient: ${ingredient.name}`,
         });
       });
     }),

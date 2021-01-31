@@ -9,6 +9,10 @@ const convertToPayload = (data) => {
 };
 
 describe('addIngredients endpoint', () => {
+  beforeEach(() => {
+    jest.resetAllMocks();
+  });
+
   describe('Invalid ingredients submission', () => {
     it('Should fail validation for an empty payload', async () => {
       const payload = convertToPayload(ingredientsMissing);
@@ -27,6 +31,15 @@ describe('addIngredients endpoint', () => {
       const payload = convertToPayload(ingredientsValid);
       const response = await addIngredients.handler(payload);
       expect(response.statusCode).toBe(200);
+    });
+
+    it('Should return a 400 response if failing to write to db', async () => {
+      jest.spyOn(Dynamo, 'write').mockImplementation(() => Promise.reject());
+      const payload = convertToPayload(ingredientsValid);
+      const response = await addIngredients.handler(payload);
+      const responseBody = JSON.parse(response.body);
+      expect(responseBody.ingredientsResponse[0].statusCode).toBe(400);
+      expect(responseBody.ingredientsResponse[1].statusCode).toBe(400);
     });
   });
 });
