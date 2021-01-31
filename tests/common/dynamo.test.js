@@ -38,4 +38,20 @@ describe('dynamo common module', () => {
       expect(responseItem).toEqual(item);
     });
   });
+
+  describe('Put method', () => {
+    it('Should successfully add item to database', async () => {
+      const table = 'fakeTable';
+      const item = { ID: 'fakeingredient' };
+      mDynamoDb.put.mockImplementation(() => {
+        return {
+          promise: () => {
+            return item; // value is not null
+          },
+        };
+      });
+      const responseItem = await Dynamo.write(item, table);
+      expect(responseItem).toEqual(item);
+    });
+  });
 });
