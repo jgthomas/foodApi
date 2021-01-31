@@ -7,13 +7,15 @@ const convertToPayload = (data) => {
 };
 
 describe('addIngredients endpoint', () => {
-  it('Should fail validation for an empty payload', async () => {
-    const payload = convertToPayload(ingredientsMissing);
-    const response = await addIngredients.handler(payload);
-    const responseBody = JSON.parse(response.body);
-    expect(response.statusCode).toBe(400);
-    expect(responseBody.message).toBe(
-      '"ingredients" must contain at least 1 items',
-    );
+  describe('Invalid ingredients submission', () => {
+    it('Should fail validation for an empty payload', async () => {
+      const payload = convertToPayload(ingredientsMissing);
+      const response = await addIngredients.handler(payload);
+      const responseBody = JSON.parse(response.body);
+      expect(response.statusCode).toBe(400);
+      expect(responseBody.message).toBe(
+        '"ingredients" must contain at least 1 items',
+      );
+    });
   });
 });
