@@ -22,5 +22,20 @@ describe('dynamo common module', () => {
         `There was an error fetching the data for ID: ${id}, from ${table}`,
       );
     });
+
+    it('Should return a result if found', async () => {
+      const id = 'fakeId';
+      const table = 'fakeTable';
+      const item = { id: 'fakeingredient' };
+      mDynamoDb.get.mockImplementation(() => {
+        return {
+          promise: () => {
+            return { Item: item };
+          },
+        };
+      });
+      const responseItem = await Dynamo.get(id, table);
+      expect(responseItem).toEqual(item);
+    });
   });
 });
