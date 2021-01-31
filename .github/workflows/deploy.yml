@@ -2,10 +2,8 @@ name: deploy
 
 on:
   push:
-    branches:
-      - master
     paths-ignore:
-      - "**/README.md"
+      - '**/README.md'
 
 jobs:
   deploy:
@@ -15,13 +13,23 @@ jobs:
       matrix:
         node-version: [12.x]
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm ci
-      - name: serverless deploy
+
+      - name: Test
+        run: |
+          npm ci
+          npm test
+          npm run lint
+          bash <(curl -s https://codecov.io/bash)
+
+      if: github.ref == 'refs/heads/master'
+      - name: Deploy
         uses: serverless/github-action@master
         with:
           args: deploy
