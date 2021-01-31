@@ -9,14 +9,10 @@ exports.handler = async (event) => {
 
   const { error } = Validate.validateIngredients(ingredientsData);
   if (error) {
-    throw error;
+    return Responses.response400({ message: error.message });
   }
 
   const { ingredients } = ingredientsData;
-
-  if (!ingredients || !Array.isArray(ingredients) || ingredients.length === 0) {
-    return Responses.response400({ message: 'No ingredients submitted.' });
-  }
 
   const ingredientsResponse = await Promise.all(
     ingredients.map(async (ingredient) => {
