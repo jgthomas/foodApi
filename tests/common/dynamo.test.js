@@ -46,12 +46,27 @@ describe('dynamo common module', () => {
       mDynamoDb.put.mockImplementation(() => {
         return {
           promise: () => {
-            return item; // value is not null
+            return { success: true }; // non-null value
           },
         };
       });
       const responseItem = await Dynamo.write(item, table);
       expect(responseItem).toEqual(item);
+    });
+
+    it('Should throw an error if failing to write to database', async () => {
+      const table = 'fakeTable';
+      const item = { ID: 'fakeingredient' };
+      mDynamoDb.put.mockImplementation(() => {
+        return {
+          promise: () => {
+            return null;
+          },
+        };
+      });
+      await expect(Dynamo.write(item, table)).rejects.toThrow(
+        `There was an error inserting ID: ${item.ID}, in table ${table}`,
+      );
     });
   });
 });
