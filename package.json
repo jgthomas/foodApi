@@ -18,7 +18,7 @@
     "serverless": "^2.21.1"
   },
   "scripts": {
-    "test": "jest --coverage",
+    "test": "jest",
     "lint": "eslint ."
   },
   "author": "",
