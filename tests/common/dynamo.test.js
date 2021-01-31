@@ -68,5 +68,13 @@ describe('dynamo common module', () => {
         `There was an error inserting ID: ${item.ID}, in table ${table}`,
       );
     });
+
+    it('Should throw an error if item missing an ID', async () => {
+      const table = 'fakeTable';
+      const item = { notAnId: 'fakeingredient' };
+      await expect(Dynamo.write(item, table)).rejects.toThrow(
+        'no ID on the data',
+      );
+    });
   });
 });
