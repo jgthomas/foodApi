@@ -4,7 +4,7 @@ module.exports = {
   resetMocks: true,
   collectCoverage: true,
   coverageDirectory: 'coverage',
-  coverageProvider: 'v8',
+  coverageProvider: 'babel',
   coverageReporters: ['html', 'lcov', 'text'],
   testEnvironment: 'node',
   testMatch: ['**/tests/**/*.js'],
