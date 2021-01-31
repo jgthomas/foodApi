@@ -21,6 +21,7 @@ describe('dynamo common module', () => {
       await expect(Dynamo.get(id, table)).rejects.toThrow(
         `There was an error fetching the data for ID: ${id}, from ${table}`,
       );
+      expect(mDynamoDb.get).toHaveBeenCalled();
     });
 
     it('Should return a result if found', async () => {
@@ -36,6 +37,7 @@ describe('dynamo common module', () => {
       });
       const responseItem = await Dynamo.get(id, table);
       expect(responseItem).toEqual(item);
+      expect(mDynamoDb.get).toHaveBeenCalled();
     });
   });
 
@@ -52,6 +54,7 @@ describe('dynamo common module', () => {
       });
       const responseItem = await Dynamo.write(item, table);
       expect(responseItem).toEqual(item);
+      expect(mDynamoDb.put).toHaveBeenCalled();
     });
 
     it('Should throw an error if failing to write to database', async () => {
@@ -67,6 +70,7 @@ describe('dynamo common module', () => {
       await expect(Dynamo.write(item, table)).rejects.toThrow(
         `There was an error inserting ID: ${item.ID}, in table ${table}`,
       );
+      expect(mDynamoDb.put).toHaveBeenCalled();
     });
 
     it('Should throw an error if item missing an ID', async () => {
