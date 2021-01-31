@@ -37,9 +37,7 @@ describe('addIngredients endpoint', () => {
       jest.spyOn(Dynamo, 'write').mockImplementation(() => Promise.reject());
       const payload = convertToPayload(ingredientsValid);
       const response = await addIngredients.handler(payload);
-      const responseBody = JSON.parse(response.body);
-      expect(responseBody.ingredientsResponse[0].statusCode).toBe(400);
-      expect(responseBody.ingredientsResponse[1].statusCode).toBe(400);
+      expect(response.statusCode).toBe(400);
     });
   });
 });

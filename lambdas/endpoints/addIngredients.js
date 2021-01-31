@@ -4,6 +4,10 @@ const Validate = require('../common/validate');
 
 const tableName = process.env.ingredientsTableName;
 
+const errorInserting = (response) => {
+  return !response.every((elem) => elem === undefined);
+};
+
 exports.handler = async (event) => {
   const ingredientsData = JSON.parse(event.body);
 
@@ -17,12 +21,14 @@ exports.handler = async (event) => {
   const ingredientsResponse = await Promise.all(
     ingredients.map(async (ingredient) => {
       return Dynamo.write(ingredient, tableName).catch(() => {
-        return Responses.response400({
-          message: `Failed to add ingredient: ${ingredient.name}`,
-        });
+        return `Failed to add ingredient: ${ingredient.name}`;
       });
     }),
   );
+
+  if (errorInserting(ingredientsResponse)) {
+    return Responses.response400({ ingredientsResponse });
+  }
 
   return Responses.response200({ ingredientsResponse });
 };
