@@ -1,7 +1,7 @@
 const Joi = require('joi');
 
 const ingredient = Joi.object({
-  id: Joi.string().alphanum().min(3).required(),
+  ID: Joi.string().alphanum().min(3).required(),
   name: Joi.string()
     .regex(/^[a-zA-Z0-9 ]*$/)
     .min(3)

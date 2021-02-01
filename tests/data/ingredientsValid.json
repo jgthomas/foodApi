@@ -1,12 +1,12 @@
 {
   "ingredients": [
     {
-      "id": "pinenuts",
+      "ID": "pinenuts",
       "name": "Pine Nuts",
       "amount": 1
     },
     {
-      "id": "sunflowerseeds",
+      "ID": "sunflowerseeds",
       "name": "Sunflower Seeds",
       "amount": 1
     }

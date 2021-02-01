@@ -11,21 +11,21 @@ const mDynamoDb = new AWS.DynamoDB.DocumentClient();
 describe('dynamo common module', () => {
   describe('Get method', () => {
     it('Should throw an error if not in the database', async () => {
-      const id = 'fakeId';
+      const ID = 'fakeId';
       const table = 'fakeTable';
       mDynamoDb.get.mockImplementation(() => {
         return {
           promise: () => null,
         };
       });
-      await expect(Dynamo.get(id, table)).rejects.toThrow(
-        `There was an error fetching the data for ID: ${id}, from ${table}`,
+      await expect(Dynamo.get(ID, table)).rejects.toThrow(
+        `There was an error fetching the data for ID: ${ID}, from ${table}`,
       );
       expect(mDynamoDb.get).toHaveBeenCalled();
     });
 
     it('Should return a result if found', async () => {
-      const id = 'fakeId';
+      const ID = 'fakeId';
       const table = 'fakeTable';
       const item = { id: 'fakeingredient' };
       mDynamoDb.get.mockImplementation(() => {
@@ -35,7 +35,7 @@ describe('dynamo common module', () => {
           },
         };
       });
-      const responseItem = await Dynamo.get(id, table);
+      const responseItem = await Dynamo.get(ID, table);
       expect(responseItem).toEqual(item);
       expect(mDynamoDb.get).toHaveBeenCalled();
     });
