@@ -1,12 +1,9 @@
 const Responses = require('../common/responses');
 const Dynamo = require('../common/dynamo');
+const Helper = require('../common/helper');
 const Validate = require('../common/validate');
 
 const tableName = process.env.ingredientsTableName;
-
-const errorInserting = (response) => {
-  return !response.every((elem) => elem === undefined);
-};
 
 exports.handler = async (event) => {
   const ingredientsData = JSON.parse(event.body);
@@ -26,7 +23,7 @@ exports.handler = async (event) => {
     }),
   );
 
-  if (errorInserting(ingredientsResponse)) {
+  if (Helper.errorInserting(ingredientsResponse)) {
     return Responses.response400({ ingredientsResponse });
   }
 
