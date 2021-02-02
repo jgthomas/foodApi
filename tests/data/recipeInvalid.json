@@ -1,0 +1,21 @@
+{
+  "recipes": [
+    {
+      "name": "Sweet Potato Salad",
+      "ingredients": [
+        {
+          "ID": "sweetpotato",
+          "alt": ["weee"]
+        },
+        {
+          "ID": "spinach",
+          "alt": []
+        },
+        {
+          "ID": "pinenuts",
+          "alt": []
+        }
+      ]
+    }
+  ]
+}
