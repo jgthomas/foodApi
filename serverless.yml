@@ -17,6 +17,12 @@ provider:
   apiGateway:
     shouldStartNameWithService: true # will be default in serverless 3.0
 
+plugins:
+  - serverless-webpack
+
+package:
+  individually: true
+
 functions:
   addIngredients:
     handler: lambdas/endpoints/addIngredients.handler
