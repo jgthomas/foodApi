@@ -1,7 +1,6 @@
 const Joi = require('joi');
 
 const ID = Joi.string().alphanum().min(3).required();
-const optionalID = Joi.string().alphanum().min(3);
 
 const name = Joi.string()
   .regex(/^[a-zA-Z0-9 ]*$/)
@@ -22,7 +21,7 @@ const recipe = Joi.object({
   ID,
   name,
   ingredients: Joi.array()
-    .items(Joi.object({ ID, alt: Joi.array().items(optionalID) }))
+    .items(Joi.object({ ID, alt: Joi.array().items(ID.optional()) }))
     .required(),
 });
 
