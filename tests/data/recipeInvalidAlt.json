@@ -1,11 +1,12 @@
 {
   "recipes": [
     {
+      "ID": "sweetpotatosalad",
       "name": "Sweet Potato Salad",
       "ingredients": [
         {
           "ID": "sweetpotato",
-          "alt": []
+          "alt": [{ "id": "invalidAlt" }]
         },
         {
           "ID": "spinach",

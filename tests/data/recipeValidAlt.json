@@ -1,6 +1,7 @@
 {
   "recipes": [
     {
+      "ID": "sweetpotatosalad",
       "name": "Sweet Potato Salad",
       "ingredients": [
         {
@@ -13,7 +14,7 @@
         },
         {
           "ID": "pinenuts",
-          "alt": []
+          "alt": ["alternatenut"]
         }
       ]
     }
