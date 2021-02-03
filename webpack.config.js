@@ -10,6 +10,7 @@ module.exports = {
   devtool: 'source-map',
   optimization: {
     minimize: false,
+    concatenateModules: false,
   },
   module: {
     rules: [
