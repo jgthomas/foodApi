@@ -1,6 +1,6 @@
-const AWS = require('aws-sdk');
+import { DynamoDB } from 'aws-sdk';
 
-const documentClient = new AWS.DynamoDB.DocumentClient();
+const documentClient = new DynamoDB.DocumentClient();
 
 const Dynamo = {
   async get(ID, TableName) {
@@ -42,4 +42,5 @@ const Dynamo = {
     return data;
   },
 };
-module.exports = Dynamo;
+
+export default Dynamo;

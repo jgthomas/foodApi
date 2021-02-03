@@ -1,11 +1,11 @@
-const Responses = require('../common/responses');
-const Dynamo = require('../common/dynamo');
-const Helper = require('../common/helper');
-const Validate = require('../common/validate');
+import Responses from '../common/responses';
+import Dynamo from '../common/dynamo';
+import Helper from '../common/helper';
+import Validate from '../common/validate';
 
 const tableName = process.env.ingredientsTableName;
 
-exports.handler = async (event) => {
+const handler = async (event) => {
   const ingredientsData = JSON.parse(event.body);
 
   const { error } = Validate.validateIngredients(ingredientsData);
@@ -29,3 +29,5 @@ exports.handler = async (event) => {
 
   return Responses.response200({ ingredientsResponse });
 };
+
+export default handler;
