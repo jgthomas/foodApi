@@ -7,6 +7,7 @@ module.exports = {
   target: 'node',
   mode: slsw.lib.webpack.isLocal ? 'development' : 'production',
   externals: [nodeExternals()],
+  devtool: 'source-map',
   optimization: {
     minimize: false,
   },
