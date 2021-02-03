@@ -11,8 +11,5 @@
       }
     ]
   ],
-  "plugins": [
-    "@babel/plugin-proposal-export-default-from",
-    "source-map-support"
-  ]
+  "plugins": ["source-map-support"]
 }
