@@ -42,4 +42,5 @@ const Dynamo = {
     return data;
   },
 };
+
 module.exports = Dynamo;
