@@ -57,6 +57,9 @@ custom:
   ingredientsTableName: ingredients
   recipeTableName: recipes
 
+  webpack:
+    includeModules: true
+
 resources:
   Resources:
     Ingredients:
