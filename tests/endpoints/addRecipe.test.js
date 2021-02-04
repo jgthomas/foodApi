@@ -9,14 +9,24 @@ import recipeInvalidAlt from '../data/recipeInvalidAlt.json';
 describe('addRecipes endpoint', () => {
   describe('Valid recipes submission', () => {
     it('Should return a 200 response for a valid submission', async () => {
-      jest.spyOn(Dynamo, 'write').mockImplementation(() => Promise.resolve());
+      jest.spyOn(Dynamo, 'write').mockImplementation(() =>
+        Promise.resolve('success').then((value) => {
+          return {
+            value,
+          };
+        }),
+      );
       const payload = Helper.convertToPayload(recipeValid);
       const response = await addRecipes(payload);
       expect(response.statusCode).toBe(200);
     });
 
     it('Should return a 200 response for a valid submission with alt ingredient', async () => {
-      jest.spyOn(Dynamo, 'write').mockImplementation(() => Promise.resolve());
+      jest.spyOn(Dynamo, 'write').mockImplementation(() =>
+        Promise.resolve('Success').then((value) => {
+          return { value };
+        }),
+      );
       const payload = Helper.convertToPayload(recipeValidAlt);
       const response = await addRecipes(payload);
       expect(response.statusCode).toBe(200);

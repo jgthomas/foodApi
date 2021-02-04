@@ -15,7 +15,11 @@ describe('addIngredients endpoint', () => {
 
   describe('Valid ingredients submission', () => {
     it('Should return a 200 response for a valid submission', async () => {
-      jest.spyOn(Dynamo, 'write').mockImplementation(() => Promise.resolve());
+      jest.spyOn(Dynamo, 'write').mockImplementation(() =>
+        Promise.resolve('Success').then((value) => {
+          return { value };
+        }),
+      );
       const payload = Helper.convertToPayload(ingredientsValid);
       const response = await addIngredients(payload);
       expect(response.statusCode).toBe(200);

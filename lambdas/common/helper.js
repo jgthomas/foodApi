@@ -4,7 +4,7 @@ const Helper = {
   },
 
   errorInserting(response) {
-    return !response.every((elem) => elem === undefined);
+    return response[0].failMessage !== undefined;
   },
 };
 

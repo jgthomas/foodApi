@@ -18,7 +18,7 @@ const handler = async (event) => {
   const ingredientsResponse = await Promise.all(
     ingredients.map(async (ingredient) => {
       return Dynamo.write(ingredient, tableName).catch(() => {
-        return `Failed to add ingredient: ${ingredient.name}`;
+        return { failMessage: `Failed to add ingredient: ${ingredient.name}` };
       });
     }),
   );
