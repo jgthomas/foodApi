@@ -59,7 +59,9 @@ custom:
   recipeTableName: recipes-${self:custom.stage}
 
   webpack:
-    includeModules: true
+    includeModules:
+      forceExclude:
+        - aws-sdk
 
 resources:
   Resources:
