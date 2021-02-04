@@ -5,6 +5,8 @@ frameworkVersion: '2'
 provider:
   name: aws
   runtime: nodejs12.x
+  stage: dev
+  region: eu-west-2 # London
   environment:
     ingredientsTableName: ${self:custom.ingredientsTableName}
     recipeTableName: ${self:custom.recipeTableName}
