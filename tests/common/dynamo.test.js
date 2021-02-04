@@ -1,5 +1,5 @@
-const AWS = require('aws-sdk');
-const Dynamo = require('../../lambdas/common/dynamo');
+import AWS from 'aws-sdk';
+import Dynamo from '../../lambdas/common/dynamo';
 
 jest.mock('aws-sdk', () => {
   const mDocumentClient = { get: jest.fn(), put: jest.fn() };

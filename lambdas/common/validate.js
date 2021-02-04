@@ -1,4 +1,4 @@
-const Joi = require('joi');
+import Joi from 'joi';
 
 const ID = Joi.string().alphanum().min(3).required();
 
@@ -37,4 +37,4 @@ const Validate = {
   },
 };
 
-module.exports = Validate;
+export default Validate;

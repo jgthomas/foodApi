@@ -1,9 +1,9 @@
-const Responses = require('../common/responses');
-const Dynamo = require('../common/dynamo');
+import Responses from '../common/responses';
+import Dynamo from '../common/dynamo';
 
 const tableName = process.env.recipeTableName;
 
-exports.handler = async (event) => {
+const handler = async (event) => {
   const recipesData = JSON.parse(event.body);
   const { recipes } = recipesData;
 
@@ -25,3 +25,5 @@ exports.handler = async (event) => {
 
   return Responses.response200({ recipesResponse });
 };
+
+export default handler;
