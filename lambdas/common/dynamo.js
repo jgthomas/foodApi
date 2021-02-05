@@ -21,6 +21,7 @@ const Dynamo = {
 
     return data.Item;
   },
+
   async write(data, TableName) {
     if (!data.ID) {
       throw Error('no ID on the data');
@@ -40,6 +41,28 @@ const Dynamo = {
     }
 
     return data;
+  },
+
+  async batchGet(data, TableName) {
+    const result = data.map(async (chunk) => {
+      const params = {
+        RequestItems: {
+          [TableName]: {
+            Keys: chunk,
+          },
+        },
+      };
+
+      const res = await documentClient.batchGet(params).promise();
+
+      if (!res || !res.Responses) {
+        throw Error(`There was an error fetching the data from ${TableName}`);
+      }
+
+      return res;
+    });
+
+    return result;
   },
 };
 
