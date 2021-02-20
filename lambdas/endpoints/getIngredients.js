@@ -19,7 +19,9 @@ const handler = async (event) => {
     chunkedIngredients,
     tableName,
   ).catch(() => {
-    return null;
+    return Responses.response400({
+      message: `Failed to retrieve ingredients: ${ingredients}`,
+    });
   });
 
   return Responses.response200({ ingredientsResponse });
