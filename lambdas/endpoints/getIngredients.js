@@ -3,6 +3,7 @@ import Dynamo from '../common/dynamo';
 import Helper from '../common/helper';
 
 const tableName = process.env.ingredientsTableName;
+const batchSize = process.env.dynamoBatchSize;
 
 const handler = async (event) => {
   const ingredientsData = JSON.parse(event.body);
@@ -12,7 +13,7 @@ const handler = async (event) => {
     return Responses.response400({ message: 'No ingredients requested.' });
   }
 
-  const chunkedIngredients = Helper.chunk(ingredients, 100);
+  const chunkedIngredients = Helper.chunk(ingredients, batchSize);
 
   const ingredientsResponse = await Dynamo.batchGet(
     chunkedIngredients,

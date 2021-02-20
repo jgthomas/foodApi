@@ -10,6 +10,7 @@ provider:
   environment:
     ingredientsTableName: ${self:custom.ingredientsTableName}
     recipeTableName: ${self:custom.recipeTableName}
+    dynamoBatchSize: ${self:custom.dynamoBatchSize}
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -59,6 +60,7 @@ custom:
   stage: ${opt:stage, self:provider.stage}
   ingredientsTableName: ingredients-${self:custom.stage}
   recipeTableName: recipes-${self:custom.stage}
+  dynamoBatchSize: 100
 
   webpack:
     includeModules:
