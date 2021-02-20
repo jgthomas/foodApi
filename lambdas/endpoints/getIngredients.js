@@ -12,8 +12,7 @@ const handler = async (event) => {
     return Responses.response400({ message: 'No ingredients requested.' });
   }
 
-  const ingredientNames = ingredients.map((ingredient) => ingredient.ID);
-  const chunkedIngredients = Helper.chunk(ingredientNames);
+  const chunkedIngredients = Helper.chunk(ingredients, 100);
 
   const ingredientsResponse = await Dynamo.batchGet(
     chunkedIngredients,
@@ -21,16 +20,6 @@ const handler = async (event) => {
   ).catch(() => {
     return null;
   });
-
-  /* const ingredientsResponse = await Promise.all(
-    ingredientNames.map(async (name) => {
-      return Dynamo.get(name, tableName).catch(() => {
-        return Responses.response400({
-          message: `Failed to retrieve ingredients: ${ingredientsData}`,
-        });
-      });
-    }),
-  ); */
 
   return Responses.response200({ ingredientsResponse });
 };

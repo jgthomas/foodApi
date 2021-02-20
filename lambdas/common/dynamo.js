@@ -44,23 +44,25 @@ const Dynamo = {
   },
 
   async batchGet(data, TableName) {
-    const result = data.map(async (chunk) => {
-      const params = {
-        RequestItems: {
-          [TableName]: {
-            Keys: chunk,
+    const result = await Promise.all(
+      data.map(async (chunk) => {
+        const params = {
+          RequestItems: {
+            [TableName]: {
+              Keys: chunk,
+            },
           },
-        },
-      };
+        };
 
-      const res = await documentClient.batchGet(params).promise();
+        const res = await documentClient.batchGet(params).promise();
 
-      if (!res || !res.Responses) {
-        throw Error(`There was an error fetching the data from ${TableName}`);
-      }
+        if (!res || !res.Responses) {
+          throw Error(`There was an error fetching the data from ${TableName}`);
+        }
 
-      return res;
-    });
+        return res;
+      }),
+    );
 
     return result;
   },
