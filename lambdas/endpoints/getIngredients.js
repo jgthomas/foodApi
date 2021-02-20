@@ -1,5 +1,6 @@
 import Responses from '../common/responses';
 import Dynamo from '../common/dynamo';
+import Helper from '../common/helper';
 
 const tableName = process.env.ingredientsTableName;
 
@@ -12,8 +13,16 @@ const handler = async (event) => {
   }
 
   const ingredientNames = ingredients.map((ingredient) => ingredient.ID);
+  const chunkedIngredients = Helper.chunk(ingredientNames);
 
-  const ingredientsResponse = await Promise.all(
+  const ingredientsResponse = await Dynamo.batchGet(
+    chunkedIngredients,
+    tableName,
+  ).catch(() => {
+    return null;
+  });
+
+  /* const ingredientsResponse = await Promise.all(
     ingredientNames.map(async (name) => {
       return Dynamo.get(name, tableName).catch(() => {
         return Responses.response400({
@@ -21,7 +30,7 @@ const handler = async (event) => {
         });
       });
     }),
-  );
+  ); */
 
   return Responses.response200({ ingredientsResponse });
 };
