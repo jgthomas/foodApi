@@ -56,7 +56,7 @@ const Dynamo = {
 
         const res = await documentClient.batchGet(params).promise();
 
-        if (!res || !res.Responses) {
+        if (!res || !res.Responses || res.Responses[TableName].length === 0) {
           throw Error(`There was an error fetching the data from ${TableName}`);
         }
 

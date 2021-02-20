@@ -20,7 +20,9 @@ const handler = async (event) => {
     tableName,
   ).catch(() => {
     return Responses.response400({
-      message: `Failed to retrieve ingredients: ${ingredients}`,
+      message: `Failed to retrieve ingredients: ${ingredients.map(
+        (ingredient) => ingredient.ID,
+      )}. One or more ingredients not found.`,
     });
   });
 
